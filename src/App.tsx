@@ -1,12 +1,26 @@
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
-function App() {
-  const apiUrl = process.env.REACT_APP_API_URL;
-console.log("API URL:", apiUrl);
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import Banner from './components/Banner/Banner';
+
+
+const App: React.FC = () => {
   return (
-    <div className="App bg-gray-300">
-    <h1 className="text-3xl font-bold text-center">BHIVE FRONTENT APP</h1>
-    </div>
+    <Provider store={store}>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow">
+          <Banner />
+        
+        </main>
+        
+        <Footer />
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;
