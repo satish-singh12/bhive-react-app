@@ -12,7 +12,7 @@ const Banner: React.FC = () => {
 
   return (
     <section className="pt-[90px] pb-20">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0">
             <h1 className="text-4xl md:text-[58px] font-bold leading-none tracking-tight">
@@ -22,7 +22,7 @@ const Banner: React.FC = () => {
           </div>
           <div className="md:w-1/2 flex justify-center">
             <div className="w-[300px] h-[300px] md:w-[388px] md:h-[388px] bg-gray-200 mix-blend-multiply">
-              <div className="w-full h-full flex items-center justify-center bg-gray-300">
+              <div className="w-full h-full flex items-center justify-center bg-gray-100">
                 <span className="text-gray-500">
                   <video
                     className="w-full max-w-3xl rounded-lg shadow-lg"
