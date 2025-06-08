@@ -8,76 +8,45 @@ const SpaceOverview: React.FC = () => {
   const { workspaces, loading, error } = useAppSelector(
     (state) => state.workspaces
   );
-  console.log("workspaces", workspaces);
+
+  const userLocation = {
+    latitude: 12.9611, // Example: MG Road, Bengaluru
+    longitude: 77.6387,
+  };
+  const defaultGoogleMapUrl =
+    "https://www.google.com/maps/place/BHIVE+Workspace+Platinum+Indiranagar/@12.9732196,77.6406548,15z/data=!4m2!3m1!1s0x0:0x310e3359eaf1ee4f?sa=X&ved=2ahUKEwjO3L_JgJ6BAxWzZWwGHSwRDXAQ_BJ6BAg9EAA&hl=en-US&ved=2ahUKEwjO3L_JgJ6BAxWzZWwGHSwRDXAQ_BJ6BAhNEAgm/maps/place/BHIVE+Workspace+Indiranagar/@12.9789187,77.6404881,17z/data=!4m6!3m5!1s0x3bae141e007a849d:0xbff26c814318fc77!8m2!3d12.9789187!4d77.643063!16s%2Fg%2F11bxf3zpnf?entry=ttu";
+
+  function getDistanceFromLatLonInKm(
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+  ): number {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return +(R * c).toFixed(1); // Returns distance in kilometers rounded to 1 decimal
+  }
+
   useEffect(() => {
     dispatch(fetchWorkspaces());
   }, [dispatch]);
 
   return (
-    // <ContainerWrapper>
-    //   <div className="container mx-auto px-4">
-    //     <div className="w-full md:w-[300px] h-[45px] text-2xl md:text-3xl my-6 flex items-center md:flex-none justify-between">
-    //       <h2 className="font-bold">Our Space Overview</h2>
-    //       <div className="md:hidden">
-    //         <svg
-    //           width="25"
-    //           height="8"
-    //           viewBox="0 0 25 8"
-    //           fill="none"
-    //           xmlns="http://www.w3.org/2000/svg"
-    //         >
-    //           <path
-    //             d="M24.3536 4.35355C24.5488 4.15829 24.5488 3.84171 24.3536 3.64645L21.1716 0.464466C20.9763 0.269204 20.6597 0.269204 20.4645 0.464466C20.2692 0.659728 20.2692 0.976311 20.4645 1.17157L23.2929 4L20.4645 6.82843C20.2692 7.02369 20.2692 7.34027 20.4645 7.53553C20.6597 7.7308 20.9763 7.7308 21.1716 7.53553L24.3536 4.35355ZM0 4.5H24V3.5H0V4.5Z"
-    //             fill="#FFBB00"
-    //           />
-    //         </svg>
-    //       </div>
-    //     </div>
-
-    //     {loading && <p>Loading workspaces...</p>}
-    //     {error && <p className="text-red-500">Error: {error}</p>}
-
-    //     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    //       {workspaces.map((workspace) => (
-    //         <div
-    //           key={workspace.id}
-    //           className="border rounded-lg overflow-hidden shadow-sm"
-    //         >
-    //           <div className="flex justify-content-around p-4">
-    //             <div className="text-xl font-bold mb-2 w-[100%]">
-    //               {workspace.name}
-    //             </div>
-    //             <div className="w-12 h-12 border">HI</div>
-    //           </div>
-    //           <div className="h-48 bg-gray-200 flex items-center justify-center">
-    //             <img
-    //               src={`${workspace.images[0]}`}
-    //               // src={`src/assets/static_assets/${workspace.images[0]}`}
-    //               alt={workspace.name}
-    //               className="w-full h-full object-cover"
-    //             />
-    //           </div>
-
-    //           {/* <p className="text-gray-600 mb-2">{workspace.address}</p> */}
-    //           <div className="flex justify-content-around  p-4">
-    //             <div className="text-xl h-20 font-bold mb-2 border p-4 mx-3 w-[50%]">
-    //               Starting at ₹{workspace.day_pass_price}/-
-    //             </div>
-    //             <div className="text-xl h-20 font-bold mb-2 border w-[50%]">
-    //               HI
-    //             </div>
-    //           </div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </ContainerWrapper>
     <ContainerWrapper>
       <div className="container mx-auto px-4">
-        {/* Title and Mobile Arrow */}
+        {/* Title */}
         <div className="w-full md:w-[300px] h-[45px] text-2xl md:text-3xl my-6 flex items-center md:flex-none justify-between">
           <h2 className="font-bold">Our Space Overview</h2>
           <div className="md:hidden">
+            {/* Mobile Arrow */}
             <svg
               width="25"
               height="8"
@@ -93,42 +62,16 @@ const SpaceOverview: React.FC = () => {
           </div>
         </div>
 
-        {/* Cards Grid */}
+        {/* Grid of Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {
-            // [
-            //   {
-            //     id: 1,
-            //     name: "HSR Sector 6, Service Road",
-            //     image: "/static_assets/space1.jpg",
-            //   },
-            //   {
-            //     id: 2,
-            //     name: "HSR Sector 3, 19th Main Road",
-            //     image: "/static_assets/space2.jpg",
-            //   },
-            //   {
-            //     id: 3,
-            //     name: "HSR Sector 6, 5th main Road",
-            //     image: "/static_assets/space3.jpg",
-            //   },
-            //   {
-            //     id: 4,
-            //     name: "HSR Sector -2, 27th main Road",
-            //     image: "/static_assets/space4.jpg",
-            //   },
-            //   {
-            //     id: 5,
-            //     name: "HSR Sector 6, Service Road",
-            //     image: "/static_assets/space5.jpg",
-            //   },
-            //   {
-            //     id: 6,
-            //     name: "HSR Sector -6, 5th main Road",
-            //     image: "/static_assets/space6.jpg",
-            //   },
-            // ]
-            workspaces?.map((workspace) => (
+          {workspaces?.map((workspace) => {
+            const basePrice = workspace.day_pass_price;
+            const discount = workspace.day_pass_discounts_percentage?.["10"];
+            const discountedPrice = discount
+              ? basePrice * (10 - discount.value / 10)
+              : basePrice * 10;
+
+            return (
               <div
                 key={workspace.id}
                 className="border rounded-lg overflow-hidden shadow-sm bg-white px-2"
@@ -138,11 +81,12 @@ const SpaceOverview: React.FC = () => {
                   <div className="text-sm w-3/4 font-semibold">
                     {workspace.name}
                   </div>
-                  <div className="min-w-[60px] rounded-md bg-gray-200 flex items-center text-center justify-center">
-                    <span
-                      role="img"
-                      aria-label="location"
-                      className="px-4 py-2 flex flex-col items-center justify-content-center"
+                  <div className="min-w-[52px] min-h-[52px] rounded-md bg-gray-200 flex items-center justify-center text-center">
+                    <a
+                      href={workspace.google_maps_url || defaultGoogleMapUrl} //added default url if url null
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2 py-1 flex flex-col items-center justify-center text-black no-underline"
                     >
                       <svg
                         width="18"
@@ -156,16 +100,26 @@ const SpaceOverview: React.FC = () => {
                           fill="#1C1B1F"
                         />
                       </svg>
-                      <div className="text-[10px] pt-1">6 Kms</div>
-                    </span>
+
+                      <div className="text-[8px] pt-1">
+                        {getDistanceFromLatLonInKm(
+                          userLocation.latitude,
+                          userLocation.longitude,
+                          workspace.latitude,
+                          workspace.longitude
+                        )}{" "}
+                        Kms
+                      </div>
+                    </a>
                   </div>
                 </div>
 
                 {/* Image */}
                 <div className="h-48 bg-gray-200">
                   <img
-                    src={`${workspace.images[0]}`}
-                    // src={`src/assets/static_assets/${workspace.images[0]}`}
+                    src={
+                      workspace.images?.[0] || "/static_assets/placeholder.jpg"
+                    }
                     alt={workspace.name}
                     className="w-full h-full object-cover rounded-md"
                   />
@@ -173,27 +127,32 @@ const SpaceOverview: React.FC = () => {
 
                 {/* Pricing */}
                 <div className="flex justify-between p-4 gap-3">
+                  {/* Day Pass */}
                   <div className="text-xs bg-gray-100 border rounded-md p-2 w-1/2">
                     <p className="text-gray-500 font-medium text-[12px] md:text-[14px]">
                       Day Pass
                     </p>
-                    <p className="text-black font-bold pt-1 text-18px md:text-[20px]">
-                      ₹ 249 / Day
+                    <p className="text-black font-bold pt-1 text-[18px] md:text-[20px]">
+                      ₹ {basePrice} / Day
                     </p>
                   </div>
-                  <div className="text-xs bg-yellow-400 border rounded-md p-2 w-1/2  relative">
-                    {/* Black box positioned on top center, overlapping the border */}
-                    <div className="w-[80px] h-[20px] text-white text-[10px] flex pt-[3px] item-center justify-center  bg-black rounded-sm absolute -top-2 left-1/2 transform -translate-x-1/2">
-                      20% Discount
-                    </div>
 
+                  {/* Bulk Pass */}
+                  <div className="text-xs bg-yellow-400 border rounded-md p-2 w-1/2 relative">
+                    {discount?.value > 0 && (
+                      <div className="w-[80px] h-[20px] text-white text-[10px] flex pt-[3px] item-center justify-center bg-black rounded-sm absolute -top-2 left-1/2 transform -translate-x-1/2">
+                        {discount.value}% Discount
+                      </div>
+                    )}
                     <p className="text-black font-medium mt-2">Bulk Pass</p>
-                    <p className="text-black font-bold">₹ 2400 / 10 Days</p>
+                    <p className="text-black font-bold">
+                      ₹ {discountedPrice} / 10 Days
+                    </p>
                   </div>
                 </div>
               </div>
-            ))
-          }
+            );
+          })}
         </div>
       </div>
     </ContainerWrapper>

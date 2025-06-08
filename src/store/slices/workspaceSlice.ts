@@ -14,11 +14,13 @@ const initialState: WorkspaceState = {
   error: null,
 };
 
+const backendUrl = process.env.REACT_APP_API_URL;
+console.log(backendUrl)
 export const fetchWorkspaces = createAsyncThunk(
   'workspaces/fetchWorkspaces',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('https://raw.githubusercontent.com/MujtabaKably/bhive-interview-project-data/main/data.json');
+      const response = await fetch(`${backendUrl}`);
       if (!response.ok) {
         throw new Error('Failed to fetch workspaces');
       }
