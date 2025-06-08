@@ -11,29 +11,37 @@ const Banner: React.FC = () => {
   }, []);
 
   return (
-    <section className="pt-[90px] pb-20">
+    <section
+      className="pt-[90px] sm:pb-20"
+      style={{
+        backgroundImage: "url('/static_assets/bgbanner.png')",
+      }}
+    >
       <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row items-center">
+        <div className="flex flex-col-reverse md:flex-row items-center">
+          {/* Left - Text (goes to bottom in mobile) */}
           <div className="md:w-1/2 mb-10 md:mb-0">
-            <h1 className="text-4xl md:text-[58px] font-bold leading-none tracking-tight">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl mt-4 md:mt-1 text-center sm:text-left mx-6 md:mx-12 font-bold leading-none tracking-tight">
               Host your meeting with world-class amenities. Starting at{" "}
               <span className="text-[#F2B304]">₹199/-!</span>
             </h1>
           </div>
+
+          {/* Right - Video (goes to top in mobile) */}
           <div className="md:w-1/2 flex justify-center">
-            <div className="w-[300px] h-[300px] md:w-[388px] md:h-[388px] bg-gray-200 mix-blend-multiply">
-              <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                <span className="text-gray-500">
+            <div className="w-[300px] h-[300px] md:w-[388px] md:h-[388px] mix-blend-multiply">
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="">
                   <video
-                    className="w-full max-w-3xl rounded-lg shadow-lg"
+                    className="w-full max-w-3xl mt-0 md:mt-28"
                     controls
                     autoPlay
                     loop
                     muted
-                    poster="/src/assets/poster.jpg"
+                    poster="/static_assets/poster.jpg"
                   >
                     <source
-                      src="/assets/Coworking video.mp4"
+                      src="/static_assets/Coworking video.mp4"
                       type="video/mp4"
                     />
                     Your browser does not support the video tag.

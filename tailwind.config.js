@@ -9,6 +9,9 @@ module.exports = {
         dark: "#222E34",
         light: "#DDDDDD",
       },
+      fontFamily: {
+        sans: ["Enter", "sans-serif"],
+      },
     },
   },
   plugins: [],

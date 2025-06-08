@@ -201,18 +201,48 @@ const WhyChooseUs: React.FC = () => {
 
   return (
     <ContainerWrapper>
-      <div className="container mx-auto">
-        <div className="w-full md:w-[300px] h-[45px] text-3xl mb-10 flex items-center justify-center">
+      <div className="container mx-auto px-4">
+        <div className="w-full md:w-[300px] h-[45px] text-2xl md:text-3xl my-6 flex items-center md:flex-none justify-between">
           <h2 className="font-bold">Why Choose Us</h2>
+          <div className="md:hidden">
+            <svg
+              width="25"
+              height="8"
+              viewBox="0 0 25 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24.3536 4.35355C24.5488 4.15829 24.5488 3.84171 24.3536 3.64645L21.1716 0.464466C20.9763 0.269204 20.6597 0.269204 20.4645 0.464466C20.2692 0.659728 20.2692 0.976311 20.4645 1.17157L23.2929 4L20.4645 6.82843C20.2692 7.02369 20.2692 7.34027 20.4645 7.53553C20.6597 7.7308 20.9763 7.7308 21.1716 7.53553L24.3536 4.35355ZM0 4.5H24V3.5H0V4.5Z"
+                fill="#FFBB00"
+              />
+            </svg>
+          </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {features.map((feature) => (
-            <FeatureCard
-              key={feature.id}
-              icon={feature.icon}
-              title={feature.title}
-            />
-          ))}
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0">
+          {features.map((feature, index) => {
+            const isFirstRow = index < 4;
+            const isFirstCol = index % 4 === 0;
+            const isLastCol = index % 4 === 3;
+            const isLastRow = index >= features.length - 4;
+
+            return (
+              <div
+                key={feature.id}
+                className={`
+              flex items-center gap-3 md:py-3 md:px-4 bg-[#ffff] shadow-sm md:shadow-none rounded-lg md:rounded-none
+              border md:border
+              ${isFirstRow ? "md:border-t-0" : ""}
+              ${isFirstCol ? "md:border-l-0" : ""}
+              ${isLastCol ? "md:border-r-0" : ""}
+              ${isLastRow ? "md:border-b-0" : ""}
+            `}
+              >
+                <FeatureCard icon={feature.icon} title={feature.title} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </ContainerWrapper>
