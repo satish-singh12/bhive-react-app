@@ -81,9 +81,7 @@ src/
 ### Available Scripts
 
 - `npm start`: Runs the app in development mode
-- `npm test`: Launches the test runner
 - `npm run build`: Builds the app for production
-- `npm run eject`: Ejects from create-react-app (advanced use)
 
 ## Development Approach
 
