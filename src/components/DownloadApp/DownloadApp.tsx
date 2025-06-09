@@ -43,7 +43,7 @@ const DownloadApp: React.FC = () => {
             />
           </div>
         </div>
-        <div className="bg-[#ffff] md:h-[200px]  sm:mt-[22%] md:mt-[18%] lg:mt-[16%] xl:mt-[13%] md:my-6 p-6 rounded-xl shadow-md flex flex-col md:flex-row items-center justify-between gap-6 relative">
+        <div className="bg-[#ffff] md:h-[230px] sm:mt-[22%] md:mt-[18%] lg:mt-[16%] xl:mt-[13%] md:my-6 p-6 rounded-xl shadow-md flex flex-col md:flex-row items-center justify-between gap-6 relative">
           {/* App Image(s) */}
           <div className="block md:hidden w-full md:w-1/2">
             <div className="flex justify-center">
