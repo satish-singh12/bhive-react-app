@@ -203,7 +203,7 @@ const WhyChooseUs: React.FC = () => {
     <ContainerWrapper>
       <div className="container mx-auto px-4">
         <div className="w-full md:w-[300px] h-[45px] text-2xl md:text-3xl my-6 flex items-center md:flex-none justify-between">
-          <h2 className="font-bold">Why Choose Us</h2>
+          <h2 className="font-bold text-[#263238]">Why Choose Us</h2>
           <div className="md:hidden">
             <svg
               width="25"

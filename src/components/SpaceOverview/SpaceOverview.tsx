@@ -44,7 +44,7 @@ const SpaceOverview: React.FC = () => {
       <div className="container mx-auto px-4">
         {/* Title */}
         <div className="w-full md:w-[300px] h-[45px] text-2xl md:text-3xl my-6 flex items-center md:flex-none justify-between">
-          <h2 className="font-bold">Our Space Overview</h2>
+          <h2 className="font-bold text-[#263238]">Our Space Overview</h2>
           <div className="md:hidden">
             {/* Mobile Arrow */}
             <svg
@@ -77,11 +77,11 @@ const SpaceOverview: React.FC = () => {
                 className="border rounded-lg overflow-hidden shadow-sm bg-white px-2"
               >
                 {/* Title & Icon */}
-                <div className="flex justify-between items-center p-3">
+                <div className="flex justify-between text-[#263238] items-center p-3">
                   <div className="text-sm w-3/4 font-semibold">
                     {workspace.name}
                   </div>
-                  <div className="min-w-[52px] min-h-[52px] rounded-md bg-gray-200 flex items-center justify-center text-center">
+                  <div className="min-w-[52px] min-h-[52px] rounded-md bg-[#EEE7E7] flex items-center justify-center text-center">
                     <a
                       href={workspace.google_maps_url || defaultGoogleMapUrl} //added default url if url null
                       target="_blank"
@@ -128,26 +128,132 @@ const SpaceOverview: React.FC = () => {
                 {/* Pricing */}
                 <div className="flex justify-between p-4 gap-3">
                   {/* Day Pass */}
-                  <div className="text-xs bg-gray-100 border rounded-md p-2 w-1/2">
-                    <p className="text-gray-500 font-medium text-[12px] md:text-[14px]">
-                      Day Pass
-                    </p>
-                    <p className="text-black font-bold pt-1 text-[18px] md:text-[20px]">
-                      ₹ {basePrice} / Day
-                    </p>
+                  <div className="flex items-center text-xs bg-gray-100 border rounded-md p-2 w-1/2">
+                    <div className="min-w-[93%]">
+                      <p className="text-[#65624C] font-medium text-[12px] md:text-[14px]">
+                        Day Pass
+                      </p>
+                      <p className="text-[#263238] font-bold pt-1 text-[14px] md:text-[18px]">
+                        ₹ {basePrice}
+                        <span className="text-[12px] text-[#263238CC]">
+                          / Day
+                        </span>
+                      </p>
+                    </div>
+                    <div className="flex justify-end w-[12px] h-[7px] text-end text-[#263238]">
+                      <svg
+                        width="7"
+                        height="12"
+                        viewBox="0 0 7 12"
+                        opacity="40%"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M6.70711 5.29289C7.09763 5.68342 7.09763 6.31658 6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683417 12.0976 0.292893 11.7071C-0.0976315 11.3166 -0.0976314 10.6834 0.292893 10.2929L4.58579 6L0.292893 1.70711C-0.097631 1.31658 -0.097631 0.683417 0.292893 0.292893C0.683417 -0.0976314 1.31658 -0.0976313 1.70711 0.292893L6.70711 5.29289Z"
+                          fill="#263238"
+                        />
+                      </svg>
+
+                      <svg
+                        width="7"
+                        height="12"
+                        viewBox="0 0 7 12"
+                        opacity="40%"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M6.70711 5.29289C7.09763 5.68342 7.09763 6.31658 6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683417 12.0976 0.292893 11.7071C-0.0976315 11.3166 -0.0976314 10.6834 0.292893 10.2929L4.58579 6L0.292893 1.70711C-0.097631 1.31658 -0.097631 0.683417 0.292893 0.292893C0.683417 -0.0976314 1.31658 -0.0976313 1.70711 0.292893L6.70711 5.29289Z"
+                          fill="#263238"
+                        />
+                      </svg>
+                      <svg
+                        width="7"
+                        height="12"
+                        viewBox="0 0 7 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M6.70711 5.29289C7.09763 5.68342 7.09763 6.31658 6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683417 12.0976 0.292893 11.7071C-0.0976315 11.3166 -0.0976314 10.6834 0.292893 10.2929L4.58579 6L0.292893 1.70711C-0.097631 1.31658 -0.097631 0.683417 0.292893 0.292893C0.683417 -0.0976314 1.31658 -0.0976313 1.70711 0.292893L6.70711 5.29289Z"
+                          fill="#263238"
+                        />
+                      </svg>
+                    </div>
                   </div>
 
                   {/* Bulk Pass */}
-                  <div className="text-xs bg-yellow-400 border rounded-md p-2 w-1/2 relative">
+                  <div className="flex items-center text-xs bg-[#FFCF4B] border border-[#FFC422] rounded-md p-2 w-1/2 relative">
                     {discount?.value > 0 && (
-                      <div className="w-[80px] h-[20px] text-white text-[10px] flex pt-[3px] item-center justify-center bg-black rounded-sm absolute -top-2 left-1/2 transform -translate-x-1/2">
+                      <div className="w-[80px] h-[20px] text-[#FFFDF7] text-[10px] flex pt-[3px] item-center justify-center bg-[#263238] rounded-sm absolute -top-2 left-1/2 transform -translate-x-1/2">
                         {discount.value}% Discount
                       </div>
                     )}
-                    <p className="text-black font-medium mt-2">Bulk Pass</p>
-                    <p className="text-black font-bold">
-                      ₹ {discountedPrice} / 10 Days
-                    </p>
+                    <div className="min-w-[93%]">
+                      <p className="text-[#514D2D] font-medium mt-2">
+                        Bulk Pass
+                      </p>
+                      <p className="text-[#263238] text-[14px] font-bold">
+                        ₹ {discountedPrice}
+                        <span className="text-[12px] text-[#263238CC]">
+                          / 10 Days
+                        </span>
+                      </p>
+                    </div>
+                    <div className="flex justify-end w-[12px] h-[7px] text-end text-[#263238]">
+                      <svg
+                        width="7"
+                        height="12"
+                        viewBox="0 0 7 12"
+                        opacity="40%"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M6.70711 5.29289C7.09763 5.68342 7.09763 6.31658 6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683417 12.0976 0.292893 11.7071C-0.0976315 11.3166 -0.0976314 10.6834 0.292893 10.2929L4.58579 6L0.292893 1.70711C-0.097631 1.31658 -0.097631 0.683417 0.292893 0.292893C0.683417 -0.0976314 1.31658 -0.0976313 1.70711 0.292893L6.70711 5.29289Z"
+                          fill="#263238"
+                        />
+                      </svg>
+
+                      <svg
+                        width="7"
+                        height="12"
+                        viewBox="0 0 7 12"
+                        opacity="40%"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M6.70711 5.29289C7.09763 5.68342 7.09763 6.31658 6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683417 12.0976 0.292893 11.7071C-0.0976315 11.3166 -0.0976314 10.6834 0.292893 10.2929L4.58579 6L0.292893 1.70711C-0.097631 1.31658 -0.097631 0.683417 0.292893 0.292893C0.683417 -0.0976314 1.31658 -0.0976313 1.70711 0.292893L6.70711 5.29289Z"
+                          fill="#263238"
+                        />
+                      </svg>
+                      <svg
+                        width="7"
+                        height="12"
+                        viewBox="0 0 7 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M6.70711 5.29289C7.09763 5.68342 7.09763 6.31658 6.70711 6.70711L1.70711 11.7071C1.31658 12.0976 0.683417 12.0976 0.292893 11.7071C-0.0976315 11.3166 -0.0976314 10.6834 0.292893 10.2929L4.58579 6L0.292893 1.70711C-0.097631 1.31658 -0.097631 0.683417 0.292893 0.292893C0.683417 -0.0976314 1.31658 -0.0976313 1.70711 0.292893L6.70711 5.29289Z"
+                          fill="#263238"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>

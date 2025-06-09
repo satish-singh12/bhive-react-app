@@ -7,7 +7,7 @@ const DownloadApp: React.FC = () => {
     <ContainerWrapper>
       {/* Section Header */}
       <div className="w-full h-[45px] text-2xl md:text-3xl my-6 flex items-center justify-between">
-        <h2 className="font-bold">Download our app now</h2>
+        <h2 className="font-bold text-[#263238]">Download our app now</h2>
         <div className="md:hidden">
           <svg
             width="25"
